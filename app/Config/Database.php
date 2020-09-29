@@ -76,36 +76,4 @@ class Database extends Config
 		'port'     => 3306,
 	];
 
-	//--------------------------------------------------------------------
-
-	public function __construct()
-	{
-		parent::__construct();
-
-		// Ensure that we always set the database group to 'tests' if
-		// we are currently running an automated test suite, so that
-		// we don't overwrite live data on accident.
-		if (ENVIRONMENT === 'testing')
-		{
-			$this->defaultGroup = 'tests';
-
-			// Under Github Actions, we can set an ENV var named 'DB'
-			// so that we can test against multiple databases.
-			if ($group = getenv('DB'))
-			{
-				if (is_file(TESTPATH . '_github/Database.php'))
-				{
-					require TESTPATH . '_github/Database.php';
-
-					if (! empty($dbconfig) && array_key_exists($group, $dbconfig))
-					{
-						$this->tests = $dbconfig[$group];
-					}
-				}
-			}
-		}
-	}
-
-	//--------------------------------------------------------------------
-
 }
