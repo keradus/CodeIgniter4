@@ -1,6 +1,9 @@
 name: PHPUnit
 
 on:
+  pull:
+    branches:
+      - action-start3
   pull_request:
     branches:
       - develop
@@ -12,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: ${{ matrix.php-versions != '8.0' && github.base_ref != '4.1' }}
 
     name: PHP ${{ matrix.php-versions }} - ${{ matrix.db-platforms }}
 
@@ -71,7 +75,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v2
           extensions: imagick
-          coverage: xdebug
+          coverage: none
         env:
           update: true
 
