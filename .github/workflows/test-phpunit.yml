@@ -78,10 +78,17 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
+      - name: Install dependencies for PHP 8.0
+        if: ${{ php-versions == '8.0' }}
+        run: composer install --no-progress --no-suggest --no-interaction --ignore-platform-reqs --optimize-autoloader
+        env:
+          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+
       - name: Install dependencies
+        if: ${{ php-versions != '8.0' }}
         run: composer install --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
         env:
-          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}     
+          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
       - name: Test with PHPUnit
         run: script -e -c "vendor/bin/phpunit -v"
