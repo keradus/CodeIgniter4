@@ -1,5 +1,6 @@
 # CodeIgniter 4 Development
 
+[![Build Status](https://github.com/michalsn/CodeIgniter4/workflows/.github/workflows/test-phpunit.yml/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions?query=workflow%3A%22Test+Framework%22)
 [![Build Status](https://github.com/actions/CodeIgniter4/workflows/.github/workflows/test-phpunit.yml/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions?query=workflow%3A%22Test+Framework%22)
 [![Build Status](https://travis-ci.org/codeigniter4/CodeIgniter4.svg?branch=develop)](https://travis-ci.org/codeigniter4/CodeIgniter4)
 [![Coverage Status](https://coveralls.io/repos/github/codeigniter4/CodeIgniter4/badge.svg?branch=develop)](https://coveralls.io/github/codeigniter4/CodeIgniter4?branch=develop)
