@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - action-start3
+      - action-test3
   pull_request:
     branches:
       - develop
