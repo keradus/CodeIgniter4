@@ -20,11 +20,18 @@ jobs:
 
     name: PHP ${{ matrix.php-versions }} - ${{ matrix.db-platforms }}
 
+    continue-on-error: ${{ matrix.experimental }}
+
     strategy:
       fail-fast: false
       matrix:
         php-versions: ['8.0']
         db-platforms: ['sqlite']
+        experimental: [false]
+        include:
+          - php: "8.0"
+            composer-options: "--ignore-platform-reqs"
+            experimental: true
 
     services:
       mysql:
@@ -79,16 +86,16 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies for PHP 8.0
-        if: ${{ matrix.php-versions == '8.0' }}
-        run: composer install --no-progress --no-suggest --no-interaction --ignore-platform-reqs --optimize-autoloader
+        #if: ${{ matrix.php-versions == '8.0' }}
+        run: composer install --no-progress --no-suggest --no-interaction ${{ matrix.composer-options }} --optimize-autoloader
         env:
           COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
-      - name: Install dependencies
-        if: ${{ matrix.php-versions != '8.0' }}
-        run: composer install --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
-        env:
-          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+      #- name: Install dependencies
+      #  if: ${{ matrix.php-versions != '8.0' }}
+      #  run: composer install --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
+      #  env:
+      #    COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
       - name: Test with PHPUnit
         run: script -e -c "vendor/bin/phpunit -v"
