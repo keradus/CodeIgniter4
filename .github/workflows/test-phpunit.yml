@@ -1,7 +1,7 @@
 name: PHPUnit
 
 on:
-  pull:
+  push:
     branches:
       - action-start3
   pull_request:
