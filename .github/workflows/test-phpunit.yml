@@ -96,7 +96,7 @@ jobs:
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: PHP ${{ matrix.php-versions }}
 
-  tests-experiment:
+  tests-experimental:
     runs-on: ubuntu-latest
 
     if: "!contains(github.event.head_commit.message, '[ci skip]') || github.base_ref == '4.1'"
@@ -182,7 +182,7 @@ jobs:
           COVERALLS_FLAG_NAME: PHP ${{ matrix.php-versions }}
 
   coveralls-finish:
-    needs: [tests, test-experiment]
+    needs: [tests, tests-experimental]
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
