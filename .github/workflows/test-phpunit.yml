@@ -29,8 +29,9 @@ jobs:
         db-platforms: ['sqlite']
         experimental: [false]
         include:
-          - php-versions: "8.0"
-            composer-options: "--ignore-platform-reqs"
+          - php-versions: '8.0'
+            db-platforms: 'sqlite'
+            composer-options: '--ignore-platform-reqs'
             experimental: true
 
     services:
