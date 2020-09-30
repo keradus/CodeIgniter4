@@ -20,6 +20,8 @@ jobs:
 
     name: PHP ${{ matrix.php-versions }} - ${{ matrix.db-platforms }}
 
+    continue-on-error: ${{ matrix.experimental }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -97,8 +99,6 @@ jobs:
       #    COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
       - name: Test with PHPUnit
-        id: run-tests
-        continue-on-error: ${{ matrix.experimental }}
         run: script -e -c "vendor/bin/phpunit -v"
         env:
           DB: ${{ matrix.db-platforms }}
