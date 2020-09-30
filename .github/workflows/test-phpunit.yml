@@ -33,6 +33,10 @@ jobs:
             db-platforms: 'sqlite'
             composer-options: '--ignore-platform-reqs'
             experimental: true
+          - php-versions: '8.0'
+            db-platforms: 'mysql'
+            composer-options: '--ignore-platform-reqs'
+            experimental: true
 
     services:
       mysql:
