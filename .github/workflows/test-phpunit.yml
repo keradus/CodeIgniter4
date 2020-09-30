@@ -85,7 +85,7 @@ jobs:
           COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
       - name: Install dependencies
-        if: ${{ php-versions != '8.0' }}
+        if: ${{ matrix.php-versions != '8.0' }}
         run: composer install --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
         env:
           COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
